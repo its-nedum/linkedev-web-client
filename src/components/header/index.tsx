@@ -16,12 +16,9 @@ import {
 import { useGetIdentity } from "@refinedev/core";
 import { IconMoon, IconSun } from "@tabler/icons";
 import React from "react";
+import { Navbar } from "components/layout";
+import { IUser } from "interfaces";
 
-type IUser = {
-  id: number;
-  name: string;
-  avatar: string;
-};
 
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   isSticky,
@@ -62,6 +59,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
       <HamburgerMenu />
 
       <HStack>
+        <Navbar />
         <IconButton
           variant="ghost"
           aria-label="Toggle theme"
@@ -73,14 +71,14 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
             h="24px"
           />
         </IconButton>
-        {(user?.avatar || user?.name) && (
+        {(user?.avatar || user?.firstName) && (
           <HStack>
-            {user?.name && (
+            {user?.firstName && (
               <Text size="sm" fontWeight="bold">
-                {user.name}
+                {user.firstName}
               </Text>
             )}
-            <Avatar size="sm" name={user?.name} src={user?.avatar} />
+            <Avatar size="sm" name={user?.avatar.url} src={user?.avatar.url} />
           </HStack>
         )}
       </HStack>

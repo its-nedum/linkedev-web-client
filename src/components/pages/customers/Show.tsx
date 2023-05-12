@@ -6,18 +6,17 @@ import {
 import { 
     Box, 
     Text,
-    Button,
-    Stack
+    Stack,
 } from "@chakra-ui/react";
 import { IUser } from "interfaces";
-import { FaUserEdit, FaTrashAlt } from "react-icons/fa"
 import { Error } from "components/helpers";
 import { Loader } from "components/helpers";
 import { Wrapper } from "components/layout";
+import { DeleteButton, EditButton } from "@refinedev/chakra-ui";
 
 
 export const ShowUser: React.FC = () => {
-    const { edit } = useNavigation();
+    const { list } = useNavigation();
     const { id } = useParsed();
     const { queryResult: { data, isLoading, isError } } = useShow<IUser>({
         resource: "users",
@@ -76,21 +75,18 @@ export const ShowUser: React.FC = () => {
                 </Box>
 
                 <Stack direction='row' spacing={4} mt={"40px"} justify={"flex-end"}>
-                    <Button 
-                        leftIcon={<FaUserEdit />} 
-                        colorScheme={"teal"} 
+                    <EditButton 
+                        recordItemId={user?.id}
+                        resource="users"
+                        colorScheme={"facebook"} 
                         variant={"solid"}
-                        onClick={() => edit("users", user?.id!)}
-                    >
-                        Edit
-                    </Button>
-                    <Button 
-                        rightIcon={<FaTrashAlt />} 
-                        colorScheme={"red"} 
+                    />
+                    <DeleteButton 
+                        recordItemId={user?.id}
+                        resource="users"
+                        onSuccess={() => list("users")}
                         variant={"solid"}
-                    >
-                        Delete
-                    </Button>
+                    />
                 </Stack>
             </Box>
         </Wrapper>

@@ -10,16 +10,18 @@ import {
     Flex,
     Select,
     Textarea,
-    Stack
+    Stack,
+    useColorMode
 } from "@chakra-ui/react";
 import { IUser } from "interfaces";
 import { Error } from "components/helpers";
 import { Loader } from "components/helpers";
-import { FaSave } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
 import { Wrapper } from "components/layout";
+import { SaveButton } from "@refinedev/chakra-ui";
 
 export const EditUser: React.FC = () => {
+    const { colorMode } = useColorMode()
     const { show } = useNavigation();
     // collect user id from the url
     const { id } = useParsed();
@@ -79,12 +81,13 @@ export const EditUser: React.FC = () => {
                 <form>
                     <Flex gap={"4"} mb={"20px"}>
                         <FormControl>
-                            <FormLabel variant={"light"}>First Name <span className={"text-danger"}>*</span></FormLabel>
+                            <FormLabel variant={"light"}>First Name <span style={{color:"red"}}>*</span></FormLabel>
                             <Input 
                                 width={{base:'100%', sm: "100%"}}
                                 height={"44px"}
                                 borderRadius={"5px"}
-                                backgroundColor={"#D9D9D9"}  
+                                _placeholder={{color:'gray'}} 
+                                color={colorMode === "dark" ? "#fff" : "#000"} 
                                 placeholder={"Enter First Name"}
                                 name={"firstName"}
                                 value={firstName}
@@ -92,12 +95,13 @@ export const EditUser: React.FC = () => {
                             />
                         </FormControl>
                         <FormControl>
-                            <FormLabel variant={"light"}>Last Name <span className={"text-danger"}>*</span></FormLabel>
+                            <FormLabel variant={"light"}>Last Name <span style={{color:"red"}}>*</span></FormLabel>
                             <Input 
                                 width={{base:'100%', sm: "100%"}}
                                 height={"44px"}
                                 borderRadius={"5px"}
-                                backgroundColor={"#D9D9D9"}  
+                                _placeholder={{color:'gray'}} 
+                                color={colorMode === "dark" ? "#fff" : "#000"}  
                                 placeholder={"Enter Last Name"}
                                 name={"lastName"}
                                 value={lastName}
@@ -107,12 +111,13 @@ export const EditUser: React.FC = () => {
                     </Flex>
                     <Flex gap={"4"} mb={"20px"}>
                         <FormControl>
-                            <FormLabel variant={"light"}>Email <span className={"text-danger"}>*</span></FormLabel>
+                            <FormLabel variant={"light"}>Email <span style={{color:"red"}}>*</span></FormLabel>
                             <Input 
                                 width={{base:'100%', sm: "100%"}}
                                 height={"44px"}
                                 borderRadius={"5px"}
-                                backgroundColor={"#D9D9D9"}  
+                                _placeholder={{color:'gray'}} 
+                                color={colorMode === "dark" ? "#fff" : "#000"} 
                                 placeholder={"Enter First Name"}
                                 name={"email"}
                                 value={email}
@@ -120,12 +125,13 @@ export const EditUser: React.FC = () => {
                             />
                         </FormControl>
                         <FormControl>
-                            <FormLabel variant={"light"}>Years Of Experience <span className={"text-danger"}>*</span></FormLabel>
+                            <FormLabel variant={"light"}>Years Of Experience <span style={{color:"red"}}>*</span></FormLabel>
                             <Select
                                 width={{base:'100%', sm: "100%"}}
                                 height={"44px"}
                                 borderRadius={"5px"}
-                                backgroundColor={"#D9D9D9"}  
+                                _placeholder={{color:'gray'}} 
+                                color={colorMode === "dark" ? "#fff" : "#000"} 
                                 placeholder={"Select..."}
                                 name={"yearsOfExperience"}
                                 value={yearsOfExperience}
@@ -140,12 +146,13 @@ export const EditUser: React.FC = () => {
                         </FormControl>
                     </Flex>
                     <FormControl>
-                        <FormLabel variant={"light"}>Programming Languages <span className={"text-danger"}>*</span></FormLabel>
+                        <FormLabel variant={"light"}>Programming Languages <span style={{color:"red"}}>*</span></FormLabel>
                         <Textarea 
                             width={{base:'100%', sm: "100%" }}
                             height={"44px"}
                             borderRadius={"5px"}
-                            backgroundColor={"#D9D9D9"}  
+                            _placeholder={{color:'gray'}} 
+                            color={colorMode === "dark" ? "#fff" : "#000"} 
                             resize={"none"}
                             placeholder={"Programming languages"}
                             name={"skills"}
@@ -155,17 +162,12 @@ export const EditUser: React.FC = () => {
                     </FormControl>
 
                     <Stack direction='row' spacing={4} mt={"40px"} justify={"flex-end"}>
-                        <Button 
-                            leftIcon={<FaSave />} 
-                            colorScheme={"teal"} 
-                            variant={"solid"}
+                        <SaveButton 
                             onClick={(e) => handleSubmit(e)}
-                        >
-                            Save
-                        </Button>
+                        />
                         <Button 
                             rightIcon={<IoMdArrowBack />} 
-                            colorScheme={"red"} 
+                            colorScheme={"gray"} 
                             variant={"solid"}
                             onClick={() => show("users", id!)}
                         >

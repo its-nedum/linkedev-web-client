@@ -1,4 +1,4 @@
-import { useList, useNavigation } from "@refinedev/core"
+import { useNavigation, useTable } from "@refinedev/core"
 import { 
     Box, 
     ListItem, 
@@ -9,26 +9,27 @@ import { IUser } from "interfaces";
 import { Error } from "components/helpers";
 import { Loader } from "components/helpers";
 import { Wrapper } from "components/layout";
+import { Pagination } from "components/helpers";
 
 export const ListUser: React.FC = () => {
     const { show } = useNavigation();
-    const { data, isLoading, isError } = useList<IUser>({
+    
+    const { 
+        tableQueryResult,
+        current,
+        setCurrent,
+        pageCount,
+     } = useTable<IUser>({
         resource: "users",
-        sorters: [
-            {
-                field: "id",
-                order: "asc",
-            },
-        ],
     });
+    
+    const users = tableQueryResult?.data?.data ?? [];
 
-    const users = data?.data;
-
-    if (isLoading) {
+    if (tableQueryResult.isLoading) {
         return <Loader />;
     }
 
-    if (isError) {
+    if (tableQueryResult.isError) {
         return <Error />;
     }
 
@@ -80,6 +81,11 @@ export const ListUser: React.FC = () => {
                     ))
                 }
             </List>
+            <Pagination 
+                current={current}
+                setCurrent={setCurrent}
+                pageCount={pageCount}
+            />
         </Wrapper>
     )
 }

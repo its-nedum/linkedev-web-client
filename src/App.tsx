@@ -22,7 +22,7 @@ function App() {
     <BrowserRouter>
       <RefineKbarProvider>
         {/* You can change the theme colors here. example: theme={RefineThemes.Magenta} */}
-        <ChakraProvider theme={RefineThemes.Blue}>
+        <ChakraProvider theme={RefineThemes.Orange}>
           <Refine
             notificationProvider={notificationProvider}
             routerProvider={routerBindings}
