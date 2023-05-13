@@ -1,4 +1,6 @@
 import { AuthBindings } from "@refinedev/core";
+import axios, { AxiosError } from "axios";
+import { API_ENDPOINTS } from "routes";
 
 type AuthActionResponse = {
     success: boolean;
@@ -24,28 +26,36 @@ export const AuthProvider: AuthBindings = {
     register: async (params: any): Promise<AuthActionResponse> => {
         const { email, password, redirectPath } = params;
         try {
-            
+            const { data } = await axios.post(API_ENDPOINTS.register, {email, password});
             return {
                 success: true,
                 redirectTo: redirectPath,
+                data
             };
         } catch (error) {
+            let err = error as AxiosError;
+            if(!err.response) throw error;
             return {
                 success: false,
+                error: err
             };
         }
     },
     login: async (params: any): Promise<AuthActionResponse> => {
         const { email, password, redirectPath } = params;
         try {
-            
+            const { data } = await axios.post(API_ENDPOINTS.login, {email, password});
             return {
                 success: true,
                 redirectTo: redirectPath,
+                data
             };
         } catch (error) {
+            let err = error as AxiosError;
+            if(!err.response) throw error;
             return {
                 success: false,
+                error: err
             };
         }
     },

@@ -48,7 +48,12 @@ export const Navbar = () => {
   return (
     <Flex alignItems="center" backgroundColor={setBackgroundColor(colorMode)} color="white" px={4} py={2}>
       <Box p="2">
-        <Heading size="md" color={setColor(colorMode)}>Linked Dev</Heading>
+        <Heading 
+          size="md" 
+          cursor={"pointer"}
+          color={setColor(colorMode)} 
+          onClick={() => push(ROUTES.home)}
+          >Linked Dev</Heading>
       </Box>
       <Spacer />
       <Box display={{ base: "none", md: "flex" }}>

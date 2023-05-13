@@ -20,6 +20,7 @@ import {
 } from "./components"
 
 import { AuthProvider } from "providers/AuthProvider";
+import { API_URL } from "routes";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
             notificationProvider={notificationProvider}
             routerProvider={routerBindings}
             authProvider={AuthProvider}
-            dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+            dataProvider={dataProvider(API_URL)}
             options={{
               syncWithLocation: true,
               warnWhenUnsavedChanges: true,
