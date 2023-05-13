@@ -1,5 +1,5 @@
 import { useState, MouseEvent } from "react";
-import { useParsed, useForm, useNavigation } from "@refinedev/core"
+import { useForm, useNavigation } from "@refinedev/core"
 import { 
     FormControl,
     FormLabel,
@@ -14,43 +14,28 @@ import {
     useColorMode
 } from "@chakra-ui/react";
 import { IUser } from "interfaces";
-import { Error } from "components/helpers";
-import { Loader } from "components/helpers";
 import { IoMdArrowBack } from "react-icons/io";
 import { Wrapper } from "components/layout";
 import { SaveButton } from "@refinedev/chakra-ui";
 
-export const EditUser: React.FC = () => {
+export const CreateUser: React.FC = () => {
     const { colorMode } = useColorMode()
-    const { show } = useNavigation();
-    // collect user id from the url
-    const { id } = useParsed();
-
-    // retrieve the record to be edited 
-    const { onFinish, queryResult } = useForm<IUser>({
-        resource: "users",
-        action: "edit",
-        id
-    });
-    const user = queryResult?.data?.data;
-
+    const { list } = useNavigation();
     // declare and initialize form state
-    const [firstName, setFirstName] = useState(user?.firstName);
-    const [lastName, setLastName] = useState(user?.lastName);
-    const [email, setEmail] = useState(user?.email);
-    const [skills, setSkills] = useState(user?.skills.toString());
-    const [yearsOfExperience, setYearsOfExperience] = useState(user?.yearsOfExperience);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [skills, setSkills] = useState("");
+    const [yearsOfExperience, setYearsOfExperience] = useState("");
 
     // input error state
     const [errorMsg, setErrorMsg] = useState("");
 
-    if (queryResult?.isLoading) {
-        return <Loader />;
-    }
+    const { onFinish } = useForm<IUser>({
+        resource: "users",
+        action: "create",
+    });
 
-    if (queryResult?.isError) {
-        return <Error />;
-    }
 
     const handleSubmit = (e: MouseEvent) => {
         e.preventDefault();
@@ -68,15 +53,15 @@ export const EditUser: React.FC = () => {
             yearsOfExperience
         })
     }
-    
+    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
     return (
         <Wrapper>
-            <Box>
+            <Box border={"1px solid gray"} padding={"10px"} borderRadius={"6px"}>
                 <Text
                     fontWeight={"600"}
                     fontSize={"19px"}
                     lineHeight={"48px"}
-                >Edit User</Text>
+                >Create Profile</Text>
                 <Text color={"red"}>{errorMsg}</Text>
                 <form>
                     <Flex gap={"4"} mb={"20px"}>
@@ -87,7 +72,7 @@ export const EditUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={colorMode === "dark" ? "#fff" : "#000"} 
+                                color={setTextColor(colorMode)}
                                 placeholder={"Enter First Name"}
                                 name={"firstName"}
                                 value={firstName}
@@ -101,7 +86,7 @@ export const EditUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={colorMode === "dark" ? "#fff" : "#000"}  
+                                color={setTextColor(colorMode)}
                                 placeholder={"Enter Last Name"}
                                 name={"lastName"}
                                 value={lastName}
@@ -117,7 +102,7 @@ export const EditUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={colorMode === "dark" ? "#fff" : "#000"} 
+                                color={setTextColor(colorMode)} 
                                 placeholder={"Enter First Name"}
                                 name={"email"}
                                 value={email}
@@ -131,7 +116,7 @@ export const EditUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={colorMode === "dark" ? "#fff" : "#000"} 
+                                color={setTextColor(colorMode)}  
                                 placeholder={"Select..."}
                                 name={"yearsOfExperience"}
                                 value={yearsOfExperience}
@@ -152,7 +137,7 @@ export const EditUser: React.FC = () => {
                             height={"44px"}
                             borderRadius={"5px"}
                             _placeholder={{color:'gray'}} 
-                            color={colorMode === "dark" ? "#fff" : "#000"} 
+                            color={setTextColor(colorMode)}  
                             resize={"none"}
                             placeholder={"Programming languages"}
                             name={"skills"}
@@ -169,7 +154,7 @@ export const EditUser: React.FC = () => {
                             rightIcon={<IoMdArrowBack />} 
                             colorScheme={"gray"} 
                             variant={"solid"}
-                            onClick={() => show("users", id!)}
+                            onClick={() => list("users")}
                         >
                             Cancel
                         </Button>

@@ -23,14 +23,19 @@ import {
 import {
     HamburgerMenu,
   } from "@refinedev/chakra-ui";
+import { useNavigation } from "@refinedev/core";
+import { ROUTES } from "routes";
 
 export const Navbar = () => {
+  const { push } = useNavigation()
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [menuItems] = useState([
-    { label: "Home", href: "#"},
-    { label: "Create Profile", href: "#" },
-    { label: "Login", href: "#" },
+    { label: "Home", href: ROUTES.home },
+    { label: "Register", href: ROUTES.register },
+    { label: "Login", href: ROUTES.login },
+    { label: "Create Profile", href: ROUTES.createProfile },
+    { label: "Logout", href: ROUTES.logout },
   ]);
 
   const setColor = (colorMode: string) => {
@@ -43,12 +48,18 @@ export const Navbar = () => {
   return (
     <Flex alignItems="center" backgroundColor={setBackgroundColor(colorMode)} color="white" px={4} py={2}>
       <Box p="2">
-        <Heading size="md" color={setColor(colorMode)}>Logo</Heading>
+        <Heading size="md" color={setColor(colorMode)}>Linked Dev</Heading>
       </Box>
       <Spacer />
       <Box display={{ base: "none", md: "flex" }}>
         {menuItems.map((item) => (
-          <Button variant="ghost" color={setColor(colorMode)} key={item.label} mr={4}>
+          <Button 
+            variant="ghost" 
+            color={setColor(colorMode)} 
+            key={item.label} 
+            mr={4}
+            onClick={() => push(item.href)}
+            >
             {item.label}
           </Button>
         ))}
@@ -75,7 +86,7 @@ export const Navbar = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Menu</DrawerHeader>
+          <DrawerHeader>Linked Dev</DrawerHeader>
           <DrawerBody>
             <VStack spacing={4} align="stretch">
               {menuItems.map((item) => (

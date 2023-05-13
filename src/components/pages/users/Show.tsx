@@ -7,16 +7,20 @@ import {
     Box, 
     Text,
     Stack,
+    useColorMode,
+    Button
 } from "@chakra-ui/react";
 import { IUser } from "interfaces";
 import { Error } from "components/helpers";
 import { Loader } from "components/helpers";
 import { Wrapper } from "components/layout";
 import { DeleteButton, EditButton } from "@refinedev/chakra-ui";
+import { IoMdArrowBack } from "react-icons/io";
 
 
 export const ShowUser: React.FC = () => {
-    const { list } = useNavigation();
+    const { list, goBack } = useNavigation();
+    const { colorMode } = useColorMode()
     const { id } = useParsed();
     const { queryResult: { data, isLoading, isError } } = useShow<IUser>({
         resource: "users",
@@ -32,10 +36,12 @@ export const ShowUser: React.FC = () => {
         return <Error />;
     }
 
+    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+
     return (
         <Wrapper>
             <Box
-                background={"#fff"}
+                border={"1px solid gray"} 
                 padding={"10px"}
                 borderRadius={"6px"}
                 >
@@ -45,7 +51,7 @@ export const ShowUser: React.FC = () => {
                     fontWeight={"400"}
                     fontSize={"20px"}
                     lineHeight={"21px"}
-                    color={"#6A6A6A"}
+                    color={setTextColor(colorMode)}
                     mb={"5px"}
                     >Name: {user?.firstName} {user?.lastName}</Text>
                     <Text
@@ -53,7 +59,7 @@ export const ShowUser: React.FC = () => {
                     fontWeight={"400"}
                     fontSize={"20px"}
                     lineHeight={"21px"}
-                    color={"#6A6A6A"}
+                    color={setTextColor(colorMode)}
                     mb={"5px"}
                     >Email: {user?.email} </Text>
                     <Text
@@ -61,7 +67,7 @@ export const ShowUser: React.FC = () => {
                     fontWeight={"400"}
                     fontSize={"20px"}
                     lineHeight={"21px"}
-                    color={"#6A6A6A"}
+                    color={setTextColor(colorMode)}
                     mb={"5px"}
                     >Skills: {user?.skills.toString()} </Text>
                     <Text
@@ -69,7 +75,7 @@ export const ShowUser: React.FC = () => {
                     fontWeight={"400"}
                     fontSize={"20px"}
                     lineHeight={"21px"}
-                    color={"#6A6A6A"}
+                    color={setTextColor(colorMode)}
                     mb={"5px"}
                     >Years of Experience: {user?.id! + 1} </Text>
                 </Box>
@@ -87,6 +93,14 @@ export const ShowUser: React.FC = () => {
                         onSuccess={() => list("users")}
                         variant={"solid"}
                     />
+                    <Button 
+                        rightIcon={<IoMdArrowBack />} 
+                        colorScheme={"gray"} 
+                        variant={"solid"}
+                        onClick={() => goBack()}
+                    >
+                        Back
+                    </Button>
                 </Stack>
             </Box>
         </Wrapper>

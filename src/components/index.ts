@@ -1,2 +1,3 @@
 export { Header } from "./header";
-export * from "./pages/customers";
+export * from "./pages/users";
+export * from "./pages/auth";

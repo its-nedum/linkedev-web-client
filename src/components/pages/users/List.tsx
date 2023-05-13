@@ -3,7 +3,8 @@ import {
     Box, 
     ListItem, 
     Text,
-    List
+    List,
+    useColorMode
 } from "@chakra-ui/react";
 import { IUser } from "interfaces";
 import { Error } from "components/helpers";
@@ -13,6 +14,7 @@ import { Pagination } from "components/helpers";
 
 export const ListUser: React.FC = () => {
     const { show } = useNavigation();
+    const { colorMode } = useColorMode()
     
     const { 
         tableQueryResult,
@@ -33,6 +35,8 @@ export const ListUser: React.FC = () => {
         return <Error />;
     }
 
+    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+
     return (
         <Wrapper>
             <List>
@@ -40,8 +44,8 @@ export const ListUser: React.FC = () => {
                     users?.map((user) => (
                         <ListItem key={user.id} mb={"10px"} onClick={() => show("users", user.id)}>
                             <Box
-                                background={"#fff"}
-                                padding={"10px"}
+                                border={"1px solid gray"} 
+                                padding={"10px"} 
                                 borderRadius={"6px"}
                             >
                                 <Text
@@ -49,7 +53,7 @@ export const ListUser: React.FC = () => {
                                 fontWeight={"400"}
                                 fontSize={"20px"}
                                 lineHeight={"21px"}
-                                color={"#6A6A6A"}
+                                color={setTextColor(colorMode)}
                                 mb={"5px"}
                                 >Name: {user.firstName} {user.lastName}</Text>
                                 <Text
@@ -57,7 +61,7 @@ export const ListUser: React.FC = () => {
                                 fontWeight={"400"}
                                 fontSize={"20px"}
                                 lineHeight={"21px"}
-                                color={"#6A6A6A"}
+                                color={setTextColor(colorMode)}
                                 mb={"5px"}
                                 >Email: {user.email} </Text>
                                 <Text
@@ -65,7 +69,7 @@ export const ListUser: React.FC = () => {
                                 fontWeight={"400"}
                                 fontSize={"20px"}
                                 lineHeight={"21px"}
-                                color={"#6A6A6A"}
+                                color={setTextColor(colorMode)}
                                 mb={"5px"}
                                 >Skills: {user.skills.toString()} </Text>
                                 <Text
@@ -73,7 +77,7 @@ export const ListUser: React.FC = () => {
                                 fontWeight={"400"}
                                 fontSize={"20px"}
                                 lineHeight={"21px"}
-                                color={"#6A6A6A"}
+                                color={setTextColor(colorMode)}
                                 mb={"5px"}
                                 >Years of Experience: {user.id + 1} </Text>
                             </Box>

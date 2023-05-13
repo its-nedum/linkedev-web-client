@@ -10,6 +10,11 @@ export interface IUser {
         url: string;
     };
     yearsOfExperience?: string;
-    // phone: string;
-    // createdAt: string;
+    bio?: string
+}
+
+export interface IAuth {
+    email: string;
+    password: string;
+    redirectPath?: string;
 }

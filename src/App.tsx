@@ -15,17 +15,21 @@ import {
   ListUser,
   ShowUser,
   EditUser,
+  Login,
+  Register,
 } from "./components"
+
+import { AuthProvider } from "providers/AuthProvider";
 
 function App() {
   return (
     <BrowserRouter>
       <RefineKbarProvider>
-        {/* You can change the theme colors here. example: theme={RefineThemes.Magenta} */}
         <ChakraProvider theme={RefineThemes.Orange}>
           <Refine
             notificationProvider={notificationProvider}
             routerProvider={routerBindings}
+            authProvider={AuthProvider}
             dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
             options={{
               syncWithLocation: true,
@@ -57,7 +61,18 @@ function App() {
                       element={<CreateUser />}
                   />
               </Route>
-              <Route path="*" element={<ErrorComponent />} />
+              <Route 
+                path="/login" 
+                element={<Login />} 
+              />
+              <Route 
+                path="/register" 
+                element={<Register />} 
+              />
+              <Route 
+                path="*" 
+                element={<ErrorComponent />} 
+              />
             </Routes>
             <RefineKbar />
             <UnsavedChangesNotifier />
