@@ -1,6 +1,7 @@
 import { AuthBindings } from "@refinedev/core";
 import axios, { AxiosError } from "axios";
 import { API_ENDPOINTS } from "routes";
+import { removeItem, setItem } from "components/utils";
 
 type AuthActionResponse = {
     success: boolean;
@@ -27,10 +28,12 @@ export const AuthProvider: AuthBindings = {
         const { email, password, redirectPath } = params;
         try {
             const { data } = await axios.post(API_ENDPOINTS.register, {email, password});
+            const { user, token } = data;
+            setItem("auth", token);
             return {
                 success: true,
                 redirectTo: redirectPath,
-                data
+                user
             };
         } catch (error) {
             let err = error as AxiosError;
@@ -45,10 +48,12 @@ export const AuthProvider: AuthBindings = {
         const { email, password, redirectPath } = params;
         try {
             const { data } = await axios.post(API_ENDPOINTS.login, {email, password});
+            const { user, token } = data;
+            setItem("auth", token);
             return {
                 success: true,
                 redirectTo: redirectPath,
-                data
+                user
             };
         } catch (error) {
             let err = error as AxiosError;
@@ -60,8 +65,11 @@ export const AuthProvider: AuthBindings = {
         }
     },
     logout: async (params: any): Promise<AuthActionResponse>=> {
+        const { redirectPath } = params;
+        removeItem("auth");
         return {
             success: true,
+            redirectTo: redirectPath
         };
     },
     check: async (): Promise<CheckResponse> => {

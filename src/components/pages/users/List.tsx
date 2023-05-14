@@ -41,48 +41,51 @@ export const ListUser: React.FC = () => {
         <Wrapper>
             <List>
                 {
-                    users?.map((user) => (
-                        <ListItem key={user.id} mb={"10px"} onClick={() => show("users", user.id)}>
-                            <Box
-                                border={"1px solid gray"} 
-                                padding={"10px"} 
-                                borderRadius={"6px"}
-                            >
-                                <Text
-                                fontFamily={"Alata"}
-                                fontWeight={"400"}
-                                fontSize={"20px"}
-                                lineHeight={"21px"}
-                                color={setTextColor(colorMode)}
-                                mb={"5px"}
-                                >Name: {user.firstName} {user.lastName}</Text>
-                                <Text
-                                fontFamily={"Alata"}
-                                fontWeight={"400"}
-                                fontSize={"20px"}
-                                lineHeight={"21px"}
-                                color={setTextColor(colorMode)}
-                                mb={"5px"}
-                                >Email: {user.email} </Text>
-                                <Text
-                                fontFamily={"Alata"}
-                                fontWeight={"400"}
-                                fontSize={"20px"}
-                                lineHeight={"21px"}
-                                color={setTextColor(colorMode)}
-                                mb={"5px"}
-                                >Skills: {user.skills.toString()} </Text>
-                                <Text
-                                fontFamily={"Alata"}
-                                fontWeight={"400"}
-                                fontSize={"20px"}
-                                lineHeight={"21px"}
-                                color={setTextColor(colorMode)}
-                                mb={"5px"}
-                                >Years of Experience: {user.id + 1} </Text>
-                            </Box>
-                        </ListItem>
-                    ))
+                    users.length > 0 ?
+                        users?.map((user) => (
+                            <ListItem key={user._id} mb={"10px"} onClick={() => show("users", user._id)}>
+                                <Box
+                                    border={"1px solid gray"} 
+                                    padding={"10px"} 
+                                    borderRadius={"6px"}
+                                >
+                                    <Text
+                                    fontFamily={"Alata"}
+                                    fontWeight={"400"}
+                                    fontSize={"20px"}
+                                    lineHeight={"21px"}
+                                    color={setTextColor(colorMode)}
+                                    mb={"5px"}
+                                    >Name: {user.firstName} {user.lastName}</Text>
+                                    <Text
+                                    fontFamily={"Alata"}
+                                    fontWeight={"400"}
+                                    fontSize={"20px"}
+                                    lineHeight={"21px"}
+                                    color={setTextColor(colorMode)}
+                                    mb={"5px"}
+                                    >Email: {user.email} </Text>
+                                    <Text
+                                    fontFamily={"Alata"}
+                                    fontWeight={"400"}
+                                    fontSize={"20px"}
+                                    lineHeight={"21px"}
+                                    color={setTextColor(colorMode)}
+                                    mb={"5px"}
+                                    >Skills: {user.skills.toString()} </Text>
+                                    <Text
+                                    fontFamily={"Alata"}
+                                    fontWeight={"400"}
+                                    fontSize={"20px"}
+                                    lineHeight={"21px"}
+                                    color={setTextColor(colorMode)}
+                                    mb={"5px"}
+                                    >Years of Experience: {user.yearsOfExperience} </Text>
+                                </Box>
+                            </ListItem>
+                        ))
+                    :
+                    <Box>No User profile found</Box>
                 }
             </List>
             <Pagination 

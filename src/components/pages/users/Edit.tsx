@@ -38,8 +38,9 @@ export const EditUser: React.FC = () => {
     const [firstName, setFirstName] = useState(user?.firstName);
     const [lastName, setLastName] = useState(user?.lastName);
     const [email, setEmail] = useState(user?.email);
-    const [skills, setSkills] = useState(user?.skills.toString());
+    const [skills, setSkills] = useState(user?.skills);
     const [yearsOfExperience, setYearsOfExperience] = useState(user?.yearsOfExperience);
+    const [bio, setBio] = useState(user?.bio);
 
     // input error state
     const [errorMsg, setErrorMsg] = useState("");
@@ -55,7 +56,14 @@ export const EditUser: React.FC = () => {
     const handleSubmit = (e: MouseEvent) => {
         e.preventDefault();
         // form input validation
-        if(!firstName || !lastName || !email || !skills || !yearsOfExperience){
+        if(
+            !firstName || 
+            !lastName || 
+            !email || 
+            !skills || 
+            !yearsOfExperience ||
+            !bio
+            ){
             setErrorMsg("*All fields are required");
             return;
         }
@@ -65,7 +73,8 @@ export const EditUser: React.FC = () => {
             lastName,
             email,
             skills,
-            yearsOfExperience
+            yearsOfExperience,
+            bio,
         })
     }
     const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
@@ -145,22 +154,37 @@ export const EditUser: React.FC = () => {
                             </Select>
                         </FormControl>
                     </Flex>
-                    <FormControl>
+                    <FormControl mb={"20px"}>
                         <FormLabel variant={"light"}>Programming Languages <span style={{color:"red"}}>*</span></FormLabel>
                         <Textarea 
                             width={{base:'100%', sm: "100%" }}
-                            height={"44px"}
                             borderRadius={"5px"}
                             _placeholder={{color:'gray'}} 
                             color={setTextColor(colorMode)} 
                             resize={"none"}
                             placeholder={"Programming languages"}
                             name={"skills"}
+                            rows={2}
                             value={skills}
                             onChange={(e) => setSkills(e.target.value)}
                         />
                     </FormControl>
-
+                    <FormControl>
+                        <FormLabel variant={"light"}>About Me <span style={{color:"red"}}>*</span><span style={{fontSize:'10px'}}> ({bio?.length}/250)</span></FormLabel>
+                        <Textarea 
+                            width={{base:'100%', sm: "100%" }}
+                            borderRadius={"5px"}
+                            _placeholder={{color:'gray'}} 
+                            color={setTextColor(colorMode)} 
+                            resize={"none"}
+                            placeholder={"About me"}
+                            name={"bio"}
+                            maxLength={250}
+                            rows={3}
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
+                        />
+                    </FormControl>
                     <Stack direction='row' spacing={4} mt={"40px"} justify={"flex-end"}>
                         <SaveButton 
                             onClick={(e) => handleSubmit(e)}

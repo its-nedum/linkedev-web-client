@@ -77,18 +77,34 @@ export const ShowUser: React.FC = () => {
                     lineHeight={"21px"}
                     color={setTextColor(colorMode)}
                     mb={"5px"}
-                    >Years of Experience: {user?.id! + 1} </Text>
+                    >Years of Experience: {user?.yearsOfExperience} </Text>
+                    <Text
+                    fontFamily={"Alata"}
+                    fontWeight={"400"}
+                    fontSize={"20px"}
+                    lineHeight={"21px"}
+                    color={setTextColor(colorMode)}
+                    mb={"5px"}
+                    >About Me:</Text>
+                    <Text
+                    fontFamily={"Alata"}
+                    fontWeight={"400"}
+                    fontSize={"20px"}
+                    lineHeight={"21px"}
+                    color={setTextColor(colorMode)}
+                    mb={"5px"}
+                    >{user?.bio}</Text>
                 </Box>
 
                 <Stack direction='row' spacing={4} mt={"40px"} justify={"flex-end"}>
                     <EditButton 
-                        recordItemId={user?.id}
+                        recordItemId={user?._id}
                         resource="users"
                         colorScheme={"facebook"} 
                         variant={"solid"}
                     />
                     <DeleteButton 
-                        recordItemId={user?.id}
+                        recordItemId={user?._id}
                         resource="users"
                         onSuccess={() => list("users")}
                         variant={"solid"}

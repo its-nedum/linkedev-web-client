@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -23,20 +23,45 @@ import {
 import {
     HamburgerMenu,
   } from "@refinedev/chakra-ui";
-import { useNavigation } from "@refinedev/core";
+import { useNavigation, useLogout } from "@refinedev/core";
 import { ROUTES } from "routes";
+import { getItem } from "components/utils";
 
 export const Navbar = () => {
   const { push } = useNavigation()
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [menuItems] = useState([
+  const { mutate: logout } = useLogout();
+  const [menuItems, setMenuItems] = useState([
     { label: "Home", href: ROUTES.home },
     { label: "Register", href: ROUTES.register },
     { label: "Login", href: ROUTES.login },
     { label: "Create Profile", href: ROUTES.createProfile },
     { label: "Logout", href: ROUTES.logout },
   ]);
+
+  const isLoggedIn = getItem("auth") ? true : false;
+  
+  useEffect(() => {
+    if(isLoggedIn){
+      // if user is loggedin hide Register and Login menu
+      setMenuItems((prevMenuItems) => {
+        return prevMenuItems.filter(item => 
+          item.label !== "Register" && 
+          item.label !== "Login"
+          )
+      });
+    }else{
+      // if user is not logged in hide profile, logout and home menu
+      setMenuItems((prevMenuItems) => {
+        return prevMenuItems.filter(item => 
+          item.label !== "Create Profile" && 
+          item.label !== "Logout" && 
+          item.label !== "Home"
+          )
+      });
+    }
+  },[isLoggedIn])
 
   const setColor = (colorMode: string) => {
     return colorMode === "dark" ? "#fff" : "#000";
@@ -63,7 +88,7 @@ export const Navbar = () => {
             color={setColor(colorMode)} 
             key={item.label} 
             mr={4}
-            onClick={() => push(item.href)}
+            onClick={() => item.label !== "Logout" ? push(item.href) : logout({redirectPath: ROUTES.home})}
             >
             {item.label}
           </Button>

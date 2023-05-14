@@ -1,16 +1,16 @@
 export interface IUser {
-    id: number;
+    _id: string;
     firstName: string;
     lastName: string;
     email: string;
     status: boolean;
     birthday: string;
-    skills: string[];
+    skills: string;
     avatar: {
         url: string;
     };
-    yearsOfExperience?: string;
-    bio?: string
+    yearsOfExperience: string;
+    bio: string
 }
 
 export interface IAuth {
