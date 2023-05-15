@@ -25,6 +25,9 @@ export const ListUser: React.FC = () => {
         setPageSize,
      } = useTable<IUser>({
         resource: "users",
+        pagination: { 
+            mode: "client" 
+        }
     });
  
     const users = tableQueryResult?.data?.data ?? [];
