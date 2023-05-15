@@ -64,7 +64,7 @@ export const Navbar = () => {
             )
         });
       }
-    }else{
+    }else if(!isLoggedIn){
       // if user is not logged in hide create profile, logout and home menu
       setMenuItems((prevMenuItems) => {
         return prevMenuItems.filter(item => 
@@ -74,7 +74,7 @@ export const Navbar = () => {
           )
       });
     }
-  },[isLoggedIn, linkedUser])
+  },[isLoggedIn, linkedUser, menuItems])
 
   const setColor = (colorMode: string) => {
     return colorMode === "dark" ? "#fff" : "#000";

@@ -13,13 +13,17 @@ import { IconChevronRight, IconChevronLeft } from "@tabler/icons";
 type PaginationProps = {
     current: number;
     pageCount: number;
-    setCurrent: (page: number) => void;
+    setCurrent: React.Dispatch<React.SetStateAction<number>>;
+    pageSize: number
+    setPageSize: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const Pagination: React.FC<PaginationProps> = ({
     current,
     pageCount,
     setCurrent,
+    pageSize,
+    setPageSize
 }) => {
     const pagination = usePagination({
         current,

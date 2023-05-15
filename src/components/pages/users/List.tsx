@@ -21,10 +21,12 @@ export const ListUser: React.FC = () => {
         current,
         setCurrent,
         pageCount,
+        pageSize,
+        setPageSize,
      } = useTable<IUser>({
         resource: "users",
     });
-    
+ 
     const users = tableQueryResult?.data?.data ?? [];
 
     if (tableQueryResult.isLoading) {
@@ -42,7 +44,7 @@ export const ListUser: React.FC = () => {
             <List>
                 {
                     users.length > 0 ?
-                        users?.map((user) => (
+                        users?.map((user: any) => (
                             <ListItem key={user._id} mb={"10px"} onClick={() => show("users", user._id)}>
                                 <Box
                                     border={"1px solid gray"} 
@@ -92,6 +94,8 @@ export const ListUser: React.FC = () => {
                 current={current}
                 setCurrent={setCurrent}
                 pageCount={pageCount}
+                pageSize={pageSize}
+                setPageSize={setPageSize}
             />
         </Wrapper>
     )

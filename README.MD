@@ -1,39 +1,38 @@
-# Linked Dev
+# Linked Dev Web Client - Documentation
 
-<div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img src="https://refine.ams3.cdn.digitaloceanspaces.com/refine_logo.png"  align="center" />
-    </a>
-</div>
-<br/>
+## Introduction
 
-This [refine](https://github.com/pankod/refine) project was generated with [superplate](https://github.com/pankod/refine).
+Linked Dev is a platform that allows users (software developers) to create a public profile stating their skill set, years of experience, and a brief summary of them. Every internet user can access this profile, including recruiters and their potential employers.
+The name was coined from [LinkedIn](https://www.linkedin.com) (a social networking website for business people to communicate).
 
-## Getting Started
+## Installation
 
-**refine** is a React-based framework for building data-intensive applications in no time ✨
-
-Refine offers lots of out-of-the box functionality for rapid development, without compromising extreme customizability. Use-cases include, but are not limited to admin panels, B2B applications and dashboards.
-
-## Available Scripts
-
-### Running the development server.
-
+To install Linked dev follow these steps
+1. Clone the repository from GitHub
 ```bash
-    npm run dev
+$ git clone https://github.com/its-nedum/linkedev-web-client.git
+```
+2. Navigate to the project directory
+```bash
+$ cd linkedev-web-client
+```
+3. Install the required dependencies
+```bash
+$ npm install
 ```
 
-### Building for production.
+## Usage
 
+To start the development server, run the following command
 ```bash
-    npm run build
+$ npm run dev
 ```
+This will start the development server on http://localhost:3000/
 
-### Running the production server.
+## Technologies Used
 
-```bash
-    npm run start
-```
+- [Refine](https://github.com/pankod/refine)
+- [Chakra UI](https://chakra-ui.com/)
 
 ## Learn More
 
