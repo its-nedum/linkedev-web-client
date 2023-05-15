@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Linked Dev is a platform that allows users (software developers) to create a public profile stating their skill set, years of experience, and a brief summary of them. Every internet user can access this profile, including recruiters and their potential employers.
+**Linked Dev** is a platform that allows users (software developers) to create a public profile stating their skill set, years of experience, and a brief summary of them. Every internet user can access this profile, including recruiters and their potential employers.
 The name was coined from [LinkedIn](https://www.linkedin.com) (a social networking website for business people to communicate).
 
 ## Installation
@@ -43,7 +43,7 @@ Linked dev is composed of the following components:
 
 ## Learn More About Technologies Used
 
-To learn more please check out the [Documentation]
+To learn more please check out the following documentations
 
 - **Refine** [Docs](https://refine.dev/docs)
 - **Chakra UI** [Docs](https://refine.dev/docs/)
