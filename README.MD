@@ -29,18 +29,27 @@ $ npm run dev
 ```
 This will start the development server on http://localhost:3000/
 
-## Technologies Used
+## Components
 
-- [Refine](https://github.com/pankod/refine)
-- [Chakra UI](https://chakra-ui.com/)
+Linked dev is composed of the following components:
 
-## Learn More
+- `App`: The top-level component that renders the entire application.
+- `Create`: The component that allows user to create their profile.
+- `List`: The component that list all the completed user profiles.
+- `Show`: The component that shows a single user profile. It also holds buttons that allows only the profile owner to either edit or delete their profile.
+- `Edit`: The component that allows the profile owner to update their profile.
+- `Login`: The component that allows registered users to log onto the platform.
+- `Register`: The component that allows users to create an account on the platform.
 
-To learn more about **refine**, please check out the [Documentation](https://refine.dev/docs)
+## Learn More About Technologies Used
 
+To learn more please check out the [Documentation]
+
+- **Refine** [Docs](https://refine.dev/docs)
 - **Chakra UI** [Docs](https://refine.dev/docs/)
 - **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
-- **REST Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
+- **REST Data Provider** [Docs](https://refine.dev/docs/packages/documentation/data-providers/simple-rest/)
+- **Auth Provider** [Docs](https://refine.dev/docs/tutorial/understanding-authprovider/index/)
 
 ## License
 
