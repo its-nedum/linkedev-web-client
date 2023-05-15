@@ -16,6 +16,7 @@ import { Loader } from "components/helpers";
 import { Wrapper } from "components/layout";
 import { DeleteButton, EditButton } from "@refinedev/chakra-ui";
 import { IoMdArrowBack } from "react-icons/io";
+import { getItem } from "components/utils";
 
 
 export const ShowUser: React.FC = () => {
@@ -37,6 +38,7 @@ export const ShowUser: React.FC = () => {
     }
 
     const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+    const linkedUser = JSON.parse(getItem("linkedev")!);
 
     return (
         <Wrapper>
@@ -97,18 +99,25 @@ export const ShowUser: React.FC = () => {
                 </Box>
 
                 <Stack direction='row' spacing={4} mt={"40px"} justify={"flex-end"}>
-                    <EditButton 
-                        recordItemId={user?._id}
-                        resource="users"
-                        colorScheme={"facebook"} 
-                        variant={"solid"}
-                    />
-                    <DeleteButton 
-                        recordItemId={user?._id}
-                        resource="users"
-                        onSuccess={() => list("users")}
-                        variant={"solid"}
-                    />
+                    {
+                        linkedUser && linkedUser?._id === user?._id ?
+                        <>
+                            <EditButton 
+                                recordItemId={user?._id}
+                                resource="users"
+                                colorScheme={"facebook"} 
+                                variant={"solid"}
+                            />
+                            <DeleteButton 
+                                recordItemId={user?._id}
+                                resource="users"
+                                onSuccess={() => list("users")}
+                                variant={"solid"}
+                            />
+                        </>
+                        :
+                        null
+                    }
                     <Button 
                         rightIcon={<IoMdArrowBack />} 
                         colorScheme={"gray"} 

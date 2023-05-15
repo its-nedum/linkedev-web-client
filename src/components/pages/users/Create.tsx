@@ -17,6 +17,7 @@ import { IUser } from "interfaces";
 import { IoMdArrowBack } from "react-icons/io";
 import { Wrapper } from "components/layout";
 import { SaveButton } from "@refinedev/chakra-ui";
+import { getItem } from "components/utils";
 
 export const CreateUser: React.FC = () => {
     const { colorMode } = useColorMode()
@@ -27,6 +28,7 @@ export const CreateUser: React.FC = () => {
     const [email, setEmail] = useState("");
     const [skills, setSkills] = useState("");
     const [yearsOfExperience, setYearsOfExperience] = useState("");
+    const [bio, setBio] = useState("");
 
     // input error state
     const [errorMsg, setErrorMsg] = useState("");
@@ -40,7 +42,7 @@ export const CreateUser: React.FC = () => {
     const handleSubmit = (e: MouseEvent) => {
         e.preventDefault();
         // form input validation
-        if(!firstName || !lastName || !email || !skills || !yearsOfExperience){
+        if(!firstName || !lastName || !email || !skills || !yearsOfExperience || !bio){
             setErrorMsg("*All fields are required");
             return;
         }
@@ -50,10 +52,13 @@ export const CreateUser: React.FC = () => {
             lastName,
             email,
             skills,
-            yearsOfExperience
+            yearsOfExperience,
+            bio
         })
     }
     const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+    const linkedUser = JSON.parse(getItem("linkedev")!);
+
     return (
         <Wrapper>
             <Box border={"1px solid gray"} padding={"10px"} borderRadius={"6px"}>
@@ -105,7 +110,8 @@ export const CreateUser: React.FC = () => {
                                 color={setTextColor(colorMode)} 
                                 placeholder={"Enter First Name"}
                                 name={"email"}
-                                value={email}
+                                value={linkedUser?.email}
+                                disabled
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </FormControl>
@@ -130,11 +136,11 @@ export const CreateUser: React.FC = () => {
                             </Select>
                         </FormControl>
                     </Flex>
-                    <FormControl>
+                    <FormControl mb={"20px"}>
                         <FormLabel variant={"light"}>Programming Languages <span style={{color:"red"}}>*</span></FormLabel>
                         <Textarea 
                             width={{base:'100%', sm: "100%" }}
-                            height={"44px"}
+                            rows={2}
                             borderRadius={"5px"}
                             _placeholder={{color:'gray'}} 
                             color={setTextColor(colorMode)}  
@@ -145,7 +151,22 @@ export const CreateUser: React.FC = () => {
                             onChange={(e) => setSkills(e.target.value)}
                         />
                     </FormControl>
-
+                    <FormControl>
+                        <FormLabel variant={"light"}>About Me <span style={{color:"red"}}>*</span><span style={{fontSize:'10px'}}> ({bio?.length}/250)</span></FormLabel>
+                        <Textarea 
+                            width={{base:'100%', sm: "100%" }}
+                            borderRadius={"5px"}
+                            _placeholder={{color:'gray'}} 
+                            color={setTextColor(colorMode)} 
+                            resize={"none"}
+                            placeholder={"About me"}
+                            name={"bio"}
+                            maxLength={250}
+                            rows={3}
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
+                        />
+                    </FormControl>
                     <Stack direction='row' spacing={4} mt={"40px"} justify={"flex-end"}>
                         <SaveButton 
                             onClick={(e) => handleSubmit(e)}

@@ -30,6 +30,7 @@ export const AuthProvider: AuthBindings = {
             const { data } = await axios.post(API_ENDPOINTS.register, {email, password});
             const { user, token } = data;
             setItem("auth", token);
+            setItem("linkedev", JSON.stringify(user));
             return {
                 success: true,
                 redirectTo: redirectPath,
@@ -50,6 +51,7 @@ export const AuthProvider: AuthBindings = {
             const { data } = await axios.post(API_ENDPOINTS.login, {email, password});
             const { user, token } = data;
             setItem("auth", token);
+            setItem("linkedev", JSON.stringify(user));
             return {
                 success: true,
                 redirectTo: redirectPath,

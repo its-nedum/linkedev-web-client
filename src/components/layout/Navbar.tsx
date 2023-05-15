@@ -28,7 +28,7 @@ import { ROUTES } from "routes";
 import { getItem } from "components/utils";
 
 export const Navbar = () => {
-  const { push } = useNavigation()
+  const { push, show } = useNavigation()
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate: logout } = useLogout();
@@ -37,22 +37,35 @@ export const Navbar = () => {
     { label: "Register", href: ROUTES.register },
     { label: "Login", href: ROUTES.login },
     { label: "Create Profile", href: ROUTES.createProfile },
-    { label: "Logout", href: ROUTES.logout },
+    { label: "My Profile", href: "#" },
+    { label: "Logout", href: "#" },
   ]);
 
   const isLoggedIn = getItem("auth") ? true : false;
+  const linkedUser = JSON.parse(getItem("linkedev")!);
   
   useEffect(() => {
     if(isLoggedIn){
       // if user is loggedin hide Register and Login menu
-      setMenuItems((prevMenuItems) => {
-        return prevMenuItems.filter(item => 
-          item.label !== "Register" && 
-          item.label !== "Login"
-          )
-      });
+      if(linkedUser?.status === 1){
+        setMenuItems((prevMenuItems) => {
+          return prevMenuItems.filter(item => 
+            item.label !== "Register" && 
+            item.label !== "Login" &&
+            item.label !== "Create Profile"
+            )
+        });
+      }else{
+        setMenuItems((prevMenuItems) => {
+          return prevMenuItems.filter(item => 
+            item.label !== "Register" && 
+            item.label !== "Login" &&
+            item.label !== "My Profile"
+            )
+        });
+      }
     }else{
-      // if user is not logged in hide profile, logout and home menu
+      // if user is not logged in hide create profile, logout and home menu
       setMenuItems((prevMenuItems) => {
         return prevMenuItems.filter(item => 
           item.label !== "Create Profile" && 
@@ -61,7 +74,7 @@ export const Navbar = () => {
           )
       });
     }
-  },[isLoggedIn])
+  },[isLoggedIn, linkedUser])
 
   const setColor = (colorMode: string) => {
     return colorMode === "dark" ? "#fff" : "#000";
@@ -88,7 +101,11 @@ export const Navbar = () => {
             color={setColor(colorMode)} 
             key={item.label} 
             mr={4}
-            onClick={() => item.label !== "Logout" ? push(item.href) : logout({redirectPath: ROUTES.home})}
+            onClick={() => 
+              item.label === "Logout" ? 
+              logout({redirectPath: ROUTES.home}) : 
+              item.label === "My Profile" ?  show("users", linkedUser?._id): 
+              push(item.href)}
             >
             {item.label}
           </Button>
