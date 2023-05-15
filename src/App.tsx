@@ -7,7 +7,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import routerBindings, {
   UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
-import dataProvider, { axiosInstance } from "@refinedev/simple-rest";
+import dataProvider from "@refinedev/simple-rest";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import {
@@ -21,26 +21,8 @@ import {
 
 import { AuthProvider } from "providers/AuthProvider";
 import { API_URL } from "routes";
-// import { getItem } from "components/utils";
 
 function App() {
-  // axiosInstance.interceptors.request.use((request: any) => {
-  //   // Retrieve the token from local storage
-  //   const token = JSON.parse(getItem("auth")!);
-  //   // Check if the header property exists
-  //   if (request.headers) {
-  //       // Set the Authorization header if it exists
-  //       request.headers["Authorization"] = `Bearer ${token}`;
-  //   } else {
-  //       // Create the headers property if it does not exist
-  //       request.headers = {
-  //           Authorization: `Bearer ${token}`,
-  //       };
-  //   }
-
-  //   return request;
-  // });
-
   return (
     <BrowserRouter>
       <RefineKbarProvider>
@@ -49,7 +31,7 @@ function App() {
             notificationProvider={notificationProvider}
             routerProvider={routerBindings}
             authProvider={AuthProvider}
-            dataProvider={dataProvider(API_URL, axiosInstance)}
+            dataProvider={dataProvider(API_URL)}
             options={{
               syncWithLocation: true,
               warnWhenUnsavedChanges: true,
@@ -91,6 +73,10 @@ function App() {
               <Route 
                 path="*" 
                 element={<ErrorComponent />} 
+              />
+              <Route 
+                path="/" 
+                element={<ListUser />} 
               />
             </Routes>
             <RefineKbar />

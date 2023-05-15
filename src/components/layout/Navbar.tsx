@@ -33,7 +33,7 @@ export const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate: logout } = useLogout();
   const [menuItems, setMenuItems] = useState([
-    { label: "Home", href: ROUTES.home },
+    { label: "Profiles", href: ROUTES.home },
     { label: "Register", href: ROUTES.register },
     { label: "Login", href: ROUTES.login },
     { label: "Create Profile", href: ROUTES.createProfile },
@@ -70,7 +70,7 @@ export const Navbar = () => {
         return prevMenuItems.filter(item => 
           item.label !== "Create Profile" && 
           item.label !== "Logout" && 
-          item.label !== "Home"
+          item.label !== "My Profile"
           )
       });
     }
@@ -103,7 +103,7 @@ export const Navbar = () => {
             mr={4}
             onClick={() => 
               item.label === "Logout" ? 
-              logout({redirectPath: ROUTES.home}) : 
+              logout({redirectPath: ROUTES.login}) : 
               item.label === "My Profile" ?  show("users", linkedUser?._id): 
               push(item.href)}
             >
