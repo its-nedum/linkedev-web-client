@@ -5,6 +5,12 @@
 **Linked Dev** is a platform that allows users (software developers) to create a public profile stating their skill set, years of experience, and a brief summary of them. Every internet user can access this profile, including recruiters and their potential employers.
 The name was coined from [LinkedIn](https://www.linkedin.com) (a social networking website for business people to communicate).
 
+## Live Link
+
+[Linked Dev - Client](https://linked-dev.netlify.app/)
+
+[Linked Dev - API](https://linkedev-api-service.onrender.com)
+
 ## Installation
 
 To install Linked dev follow these steps
@@ -36,7 +42,7 @@ Linked dev is composed of the following components:
 - `App`: The top-level component that renders the entire application.
 - `Create`: The component that allows user to create their profile.
 - `List`: The component that list all the completed user profiles.
-- `Show`: The component that shows a single user profile. It also holds buttons that allows only the profile owner to either edit or delete their profile.
+- `Show`: The component that shows a single user profile. It also holds actions that allows only the profile owner to either edit or delete their profile.
 - `Edit`: The component that allows the profile owner to update their profile.
 - `Login`: The component that allows registered users to log onto the platform.
 - `Register`: The component that allows users to create an account on the platform.
