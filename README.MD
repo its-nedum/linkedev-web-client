@@ -7,9 +7,9 @@ The name was coined from [LinkedIn](https://www.linkedin.com) (a social networki
 
 ## Live Link
 
-[Linked Dev - Client](https://linked-dev.netlify.app/)
+[Linked Dev - Client](https://linked-dev.netlify.app/) `https://linked-dev.netlify.app/`
 
-[Linked Dev - API](https://linkedev-api-service.onrender.com)
+[Linked Dev - API](https://linkedev-api-service.onrender.com) `https://linkedev-api-service.onrender.com`
 
 ## Installation
 
