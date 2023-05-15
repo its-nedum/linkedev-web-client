@@ -31,6 +31,12 @@ export const Register: React.FC = () => {
             setErrorMsg("*All fields are required");
             return;
         }
+
+        if(password.length < 8){
+            setErrorMsg("*Password must be a min. of 8 characters");
+            return
+        }
+        
         setErrorMsg("")
         register({
             email,

@@ -12,8 +12,8 @@ The name was coined from [LinkedIn](https://www.linkedin.com) (a social networki
 [Linked Dev - Server](https://linkedev-api-service.onrender.com) `https://linkedev-api-service.onrender.com`
 
 ## Repository
-- **Client** [Repo](https://github.com/its-nedum/linkedev-web-client)
-- **Server** [Repo](https://github.com/its-nedum/linkedev-web-service)
+- **Client** [Repo](https://github.com/its-nedum/linkedev-web-client) `https://github.com/its-nedum/linkedev-web-client`
+- **Server** [Repo](https://github.com/its-nedum/linkedev-web-service) `https://github.com/its-nedum/linkedev-web-service`
 
 ## Installation
 
@@ -34,7 +34,7 @@ $ npm install
 ## Envronment Variable
 Linked dev client requires the following in your `.env`
 
-`REACT_APP_API_URL`
+- `REACT_APP_API_URL`
 
 This should be the [Linked Dev Web Service](https://github.com/its-nedum/linkedev-web-service) base url
 
