@@ -38,7 +38,7 @@ export const Navbar = () => {
     { label: "Login", href: ROUTES.login },
     { label: "Create Profile", href: ROUTES.createProfile },
     { label: "My Profile", href: "#" },
-    { label: "Logout", href: "#" },
+    { label: "Log out", href: "#" },
   ]);
 
   const isLoggedIn = getItem("auth") ? true : false;
@@ -69,7 +69,7 @@ export const Navbar = () => {
       setMenuItems((prevMenuItems) => {
         return prevMenuItems.filter(item => 
           item.label !== "Create Profile" && 
-          item.label !== "Logout" && 
+          item.label !== "Log out" && 
           item.label !== "My Profile"
           )
       });
@@ -102,7 +102,7 @@ export const Navbar = () => {
             key={item.label} 
             mr={4}
             onClick={() => 
-              item.label === "Logout" ? 
+              item.label === "Log out" ? 
               logout({redirectPath: ROUTES.login}) : 
               item.label === "My Profile" ?  show("users", linkedUser?._id): 
               push(item.href)}
@@ -140,9 +140,13 @@ export const Navbar = () => {
                 <Button
                   variant="ghost"
                   key={item.label}
-                  onClick={onClose}
                   w="100%"
-                >
+                  onClick={() => 
+                    item.label === "Log out" ? 
+                    logout({redirectPath: ROUTES.login}) : 
+                    item.label === "My Profile" ?  show("users", linkedUser?._id): 
+                    push(item.href)}
+                  >
                   {item.label}
                 </Button>
               ))}

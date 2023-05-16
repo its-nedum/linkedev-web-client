@@ -16,7 +16,7 @@ import { Loader } from "components/helpers";
 import { Wrapper } from "components/layout";
 import { DeleteButton, EditButton } from "@refinedev/chakra-ui";
 import { IoMdArrowBack } from "react-icons/io";
-import { getItem } from "components/utils";
+import { getItem, setItem } from "components/utils";
 
 
 export const ShowUser: React.FC = () => {
@@ -51,7 +51,7 @@ export const ShowUser: React.FC = () => {
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
-                    fontSize={"20px"}
+                    fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
                     color={setTextColor(colorMode)}
                     mb={"5px"}
@@ -59,7 +59,7 @@ export const ShowUser: React.FC = () => {
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
-                    fontSize={"20px"}
+                    fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
                     color={setTextColor(colorMode)}
                     mb={"5px"}
@@ -67,7 +67,7 @@ export const ShowUser: React.FC = () => {
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
-                    fontSize={"20px"}
+                    fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
                     color={setTextColor(colorMode)}
                     mb={"5px"}
@@ -75,7 +75,7 @@ export const ShowUser: React.FC = () => {
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
-                    fontSize={"20px"}
+                    fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
                     color={setTextColor(colorMode)}
                     mb={"5px"}
@@ -83,7 +83,7 @@ export const ShowUser: React.FC = () => {
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
-                    fontSize={"20px"}
+                    fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
                     color={setTextColor(colorMode)}
                     mb={"5px"}
@@ -91,7 +91,7 @@ export const ShowUser: React.FC = () => {
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
-                    fontSize={"20px"}
+                    fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
                     color={setTextColor(colorMode)}
                     mb={"5px"}
@@ -107,12 +107,17 @@ export const ShowUser: React.FC = () => {
                                 resource="users"
                                 colorScheme={"facebook"} 
                                 variant={"solid"}
+                                hideText
                             />
                             <DeleteButton 
                                 recordItemId={user?._id}
                                 resource="users"
-                                onSuccess={() => list("users")}
-                                variant={"solid"}
+                                onSuccess={() => { 
+                                    list("users");
+                                    setItem("linkedev", JSON.stringify({...linkedUser, status: 0 }))
+                                }}
+                                variant={"solid"} 
+                                hideText
                             />
                         </>
                         :
@@ -122,7 +127,7 @@ export const ShowUser: React.FC = () => {
                         rightIcon={<IoMdArrowBack />} 
                         colorScheme={"gray"} 
                         variant={"solid"}
-                        onClick={() => goBack()}
+                        onClick={() => goBack()} 
                     >
                         Back
                     </Button>

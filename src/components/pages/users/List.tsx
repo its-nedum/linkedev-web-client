@@ -26,8 +26,9 @@ export const ListUser: React.FC = () => {
      } = useTable<IUser>({
         resource: "users",
         pagination: { 
-            mode: "client" 
-        }
+            mode: "client",
+        },
+        
     });
  
     const users = tableQueryResult?.data?.data ?? [];
@@ -48,7 +49,12 @@ export const ListUser: React.FC = () => {
                 {
                     users.length > 0 ?
                         users?.map((user: any) => (
-                            <ListItem key={user._id} mb={"10px"} onClick={() => show("users", user._id)}>
+                            <ListItem 
+                                key={user._id} 
+                                mb={"10px"} 
+                                cursor={"pointer"}
+                                onClick={() => show("users", user._id)}
+                            >
                                 <Box
                                     border={"1px solid gray"} 
                                     padding={"10px"} 
@@ -57,7 +63,7 @@ export const ListUser: React.FC = () => {
                                     <Text
                                     fontFamily={"Alata"}
                                     fontWeight={"400"}
-                                    fontSize={"20px"}
+                                    fontSize={["16px", "20px"]}
                                     lineHeight={"21px"}
                                     color={setTextColor(colorMode)}
                                     mb={"5px"}
@@ -65,7 +71,7 @@ export const ListUser: React.FC = () => {
                                     <Text
                                     fontFamily={"Alata"}
                                     fontWeight={"400"}
-                                    fontSize={"20px"}
+                                    fontSize={["16px", "20px"]}
                                     lineHeight={"21px"}
                                     color={setTextColor(colorMode)}
                                     mb={"5px"}
@@ -73,7 +79,7 @@ export const ListUser: React.FC = () => {
                                     <Text
                                     fontFamily={"Alata"}
                                     fontWeight={"400"}
-                                    fontSize={"20px"}
+                                    fontSize={["16px", "20px"]}
                                     lineHeight={"21px"}
                                     color={setTextColor(colorMode)}
                                     mb={"5px"}
@@ -81,7 +87,7 @@ export const ListUser: React.FC = () => {
                                     <Text
                                     fontFamily={"Alata"}
                                     fontWeight={"400"}
-                                    fontSize={"20px"}
+                                    fontSize={["16px", "20px"]}
                                     lineHeight={"21px"}
                                     color={setTextColor(colorMode)}
                                     mb={"5px"}
@@ -90,16 +96,20 @@ export const ListUser: React.FC = () => {
                             </ListItem>
                         ))
                     :
-                    <Box>No User profile found</Box>
+                    <Box fontSize={"16px"}>No user profile found!</Box>
                 }
             </List>
-            <Pagination 
-                current={current}
-                setCurrent={setCurrent}
-                pageCount={pageCount}
-                pageSize={pageSize}
-                setPageSize={setPageSize}
-            />
+            {
+                users.length > 0 ?
+                    <Pagination 
+                        current={current}
+                        setCurrent={setCurrent}
+                        pageCount={pageCount}
+                        pageSize={pageSize}
+                        setPageSize={setPageSize}
+                    />
+                : null
+            }
         </Wrapper>
     )
 }

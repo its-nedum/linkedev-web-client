@@ -22,6 +22,7 @@ import {
 import { AuthProvider } from "providers/AuthProvider";
 import { API_URL } from "routes";
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -33,7 +34,7 @@ function App() {
             authProvider={AuthProvider}
             dataProvider={dataProvider(API_URL)}
             options={{
-              syncWithLocation: true,
+              syncWithLocation: false,
               warnWhenUnsavedChanges: true,
             }}
             resources={[
@@ -63,11 +64,11 @@ function App() {
                   />
               </Route>
               <Route 
-                path="/login" 
+                path="login" 
                 element={<Login />} 
               />
               <Route 
-                path="/register" 
+                path="register" 
                 element={<Register />} 
               />
               <Route 

@@ -17,15 +17,15 @@ import { IUser } from "interfaces";
 import { IoMdArrowBack } from "react-icons/io";
 import { Wrapper } from "components/layout";
 import { SaveButton } from "@refinedev/chakra-ui";
-import { getItem } from "components/utils";
+import { getItem, setItem } from "components/utils";
 
 export const CreateUser: React.FC = () => {
     const { colorMode } = useColorMode()
     const { list } = useNavigation();
+
     // declare and initialize form state
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
     const [skills, setSkills] = useState("");
     const [yearsOfExperience, setYearsOfExperience] = useState("");
     const [bio, setBio] = useState("");
@@ -33,31 +33,39 @@ export const CreateUser: React.FC = () => {
     // input error state
     const [errorMsg, setErrorMsg] = useState("");
 
+    const user = JSON.parse(getItem("linkedev")!);
+
     const { onFinish } = useForm<IUser>({
         resource: "users",
         action: "create",
     });
 
-
     const handleSubmit = (e: MouseEvent) => {
         e.preventDefault();
         // form input validation
-        if(!firstName || !lastName || !email || !skills || !yearsOfExperience || !bio){
+        if(!firstName || !lastName || !skills || !yearsOfExperience || !bio){
             setErrorMsg("*All fields are required");
             return;
         }
+        // clear error message if any
         setErrorMsg("");
+
+        // send form data to useForm hook for submission
         onFinish({
+            id: user?._id,
             firstName,
             lastName,
-            email,
+            email: user?.email,
             skills,
             yearsOfExperience,
             bio
-        })
+        });
+        
+        // set user status to 1
+        setItem("linkedev", JSON.stringify({...user, status: 1 }));
     }
+
     const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
-    const linkedUser = JSON.parse(getItem("linkedev")!);
 
     return (
         <Wrapper>
@@ -110,9 +118,8 @@ export const CreateUser: React.FC = () => {
                                 color={setTextColor(colorMode)} 
                                 placeholder={"Enter First Name"}
                                 name={"email"}
-                                value={linkedUser?.email}
+                                value={user?.email}
                                 disabled
-                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </FormControl>
                         <FormControl>

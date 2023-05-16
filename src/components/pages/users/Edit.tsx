@@ -30,7 +30,7 @@ export const EditUser: React.FC = () => {
     const { onFinish, queryResult } = useForm<IUser>({
         resource: "users",
         action: "edit",
-        id
+        id,
     });
     const user = queryResult?.data?.data;
 
@@ -130,6 +130,7 @@ export const EditUser: React.FC = () => {
                                 placeholder={"Enter First Name"}
                                 name={"email"}
                                 value={email}
+                                disabled
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </FormControl>
