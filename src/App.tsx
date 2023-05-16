@@ -1,8 +1,10 @@
 import { Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-
-import { notificationProvider, RefineThemes, ErrorComponent } from "@refinedev/chakra-ui";
-
+import { 
+  notificationProvider, 
+  RefineThemes, 
+  ErrorComponent 
+} from "@refinedev/chakra-ui";
 import { ChakraProvider } from "@chakra-ui/react";
 import routerBindings, {
   UnsavedChangesNotifier,

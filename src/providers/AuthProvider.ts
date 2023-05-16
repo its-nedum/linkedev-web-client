@@ -1,7 +1,7 @@
-import { AuthBindings } from "@refinedev/core";
+import { AuthBindings, HttpError } from "@refinedev/core";
 import axios, { AxiosError } from "axios";
 import { API_ENDPOINTS } from "routes";
-import { removeItem, setItem } from "components/utils";
+import { getItem, removeItem, setItem } from "components/utils";
 
 type AuthActionResponse = {
     success: boolean;
@@ -23,11 +23,33 @@ type OnErrorResponse = {
     error?: Error;
 };
 
+const axiosInstance = axios.create();
+
+axiosInstance.defaults.headers.common = {
+    Authorization: `Bearer ${getItem("auth")}`,
+    Accept: "application/json",
+    "Content-Type": "application/json"
+}
+
+axiosInstance.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        const customError: HttpError = {
+            ...error,
+            message: error.response?.data?.message,
+            statusCode: error.response?.status,
+        };
+        return Promise.reject(customError);
+    },
+);
+
 export const AuthProvider: AuthBindings = {
     register: async (params: any): Promise<AuthActionResponse> => {
         const { email, password, redirectPath } = params;
         try {
-            const { data } = await axios.post(API_ENDPOINTS.register, {email, password});
+            const { data } = await axiosInstance.post(API_ENDPOINTS.register, {email, password});
             const { user, token } = data;
             setItem("auth", token);
             setItem("linkedev", JSON.stringify(user));
@@ -48,7 +70,7 @@ export const AuthProvider: AuthBindings = {
     login: async (params: any): Promise<AuthActionResponse> => {
         const { email, password, redirectPath } = params;
         try {
-            const { data } = await axios.post(API_ENDPOINTS.login, {email, password});
+            const { data } = await axiosInstance.post(API_ENDPOINTS.login, {email, password});
             const { user, token } = data;
             setItem("auth", token);
             setItem("linkedev", JSON.stringify(user));
