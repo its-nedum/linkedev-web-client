@@ -65,7 +65,7 @@ export const CreateUser: React.FC = () => {
         setItem("linkedev", JSON.stringify({...user, status: 1 }));
     }
 
-    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+    const setTextColor = () => colorMode === "dark" ? "#fff" : "#000";
 
     return (
         <Wrapper>
@@ -85,7 +85,7 @@ export const CreateUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)}
+                                color={setTextColor()}
                                 placeholder={"Enter First Name"}
                                 name={"firstName"}
                                 value={firstName}
@@ -99,7 +99,7 @@ export const CreateUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)}
+                                color={setTextColor()}
                                 placeholder={"Enter Last Name"}
                                 name={"lastName"}
                                 value={lastName}
@@ -115,7 +115,7 @@ export const CreateUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)} 
+                                color={setTextColor()} 
                                 placeholder={"Enter First Name"}
                                 name={"email"}
                                 value={user?.email}
@@ -129,7 +129,7 @@ export const CreateUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)}  
+                                color={setTextColor()}  
                                 placeholder={"Select..."}
                                 name={"yearsOfExperience"}
                                 value={yearsOfExperience}
@@ -150,7 +150,7 @@ export const CreateUser: React.FC = () => {
                             rows={2}
                             borderRadius={"5px"}
                             _placeholder={{color:'gray'}} 
-                            color={setTextColor(colorMode)}  
+                            color={setTextColor()}  
                             resize={"none"}
                             placeholder={"Programming languages"}
                             name={"skills"}
@@ -164,7 +164,7 @@ export const CreateUser: React.FC = () => {
                             width={{base:'100%', sm: "100%" }}
                             borderRadius={"5px"}
                             _placeholder={{color:'gray'}} 
-                            color={setTextColor(colorMode)} 
+                            color={setTextColor()} 
                             resize={"none"}
                             placeholder={"About me"}
                             name={"bio"}

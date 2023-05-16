@@ -37,7 +37,7 @@ export const ShowUser: React.FC = () => {
         return <Error />;
     }
 
-    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+    const setTextColor = () => colorMode === "dark" ? "#fff" : "#000";
     const linkedUser = JSON.parse(getItem("linkedev")!);
 
     return (
@@ -53,39 +53,39 @@ export const ShowUser: React.FC = () => {
                     fontWeight={"400"}
                     fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
-                    color={setTextColor(colorMode)}
-                    mb={"5px"}
+                    color={setTextColor()}
+                    mb={"15px"}
                     >Name: {user?.firstName} {user?.lastName}</Text>
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
                     fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
-                    color={setTextColor(colorMode)}
-                    mb={"5px"}
+                    color={setTextColor()}
+                    mb={"15px"}
                     >Email: {user?.email} </Text>
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
                     fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
-                    color={setTextColor(colorMode)}
-                    mb={"5px"}
+                    color={setTextColor()}
+                    mb={"15px"}
                     >Skills: {user?.skills.toString()} </Text>
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
                     fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
-                    color={setTextColor(colorMode)}
-                    mb={"5px"}
+                    color={setTextColor()}
+                    mb={"15px"}
                     >Years of Experience: {user?.yearsOfExperience} </Text>
                     <Text
                     fontFamily={"Alata"}
                     fontWeight={"400"}
                     fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
-                    color={setTextColor(colorMode)}
+                    color={setTextColor()}
                     mb={"5px"}
                     >About Me:</Text>
                     <Text
@@ -93,7 +93,7 @@ export const ShowUser: React.FC = () => {
                     fontWeight={"400"}
                     fontSize={["16px", "20px"]}
                     lineHeight={"21px"}
-                    color={setTextColor(colorMode)}
+                    color={setTextColor()}
                     mb={"5px"}
                     >{user?.bio}</Text>
                 </Box>

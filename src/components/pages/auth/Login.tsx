@@ -38,6 +38,7 @@ export const Login: React.FC = () => {
         }
 
         setErrorMsg("");
+
         login({
             email,
             password,
@@ -45,7 +46,7 @@ export const Login: React.FC = () => {
         })
     }
 
-    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+    const setTextColor = () => colorMode === "dark" ? "#fff" : "#000";
 
     return(
         <Wrapper>
@@ -64,7 +65,7 @@ export const Login: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)}
+                                color={setTextColor()}
                                 placeholder={"Enter Email"}
                                 name={"email"}
                                 value={email}
@@ -78,7 +79,7 @@ export const Login: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)}
+                                color={setTextColor()}
                                 placeholder={"Enter password"}
                                 type={"password"}
                                 name={"password"}

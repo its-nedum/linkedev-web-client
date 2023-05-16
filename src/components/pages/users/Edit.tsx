@@ -77,7 +77,7 @@ export const EditUser: React.FC = () => {
             bio,
         })
     }
-    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+    const setTextColor = () => colorMode === "dark" ? "#fff" : "#000";
     return (
         <Wrapper>
             <Box border={"1px solid gray"} padding={"10px"} borderRadius={"6px"}>
@@ -96,7 +96,7 @@ export const EditUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)} 
+                                color={setTextColor()} 
                                 placeholder={"Enter First Name"}
                                 name={"firstName"}
                                 value={firstName}
@@ -110,7 +110,7 @@ export const EditUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)}  
+                                color={setTextColor()}  
                                 placeholder={"Enter Last Name"}
                                 name={"lastName"}
                                 value={lastName}
@@ -126,7 +126,7 @@ export const EditUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)} 
+                                color={setTextColor()} 
                                 placeholder={"Enter First Name"}
                                 name={"email"}
                                 value={email}
@@ -141,7 +141,7 @@ export const EditUser: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)} 
+                                color={setTextColor()} 
                                 placeholder={"Select..."}
                                 name={"yearsOfExperience"}
                                 value={yearsOfExperience}
@@ -161,7 +161,7 @@ export const EditUser: React.FC = () => {
                             width={{base:'100%', sm: "100%" }}
                             borderRadius={"5px"}
                             _placeholder={{color:'gray'}} 
-                            color={setTextColor(colorMode)} 
+                            color={setTextColor()} 
                             resize={"none"}
                             placeholder={"Programming languages"}
                             name={"skills"}
@@ -176,7 +176,7 @@ export const EditUser: React.FC = () => {
                             width={{base:'100%', sm: "100%" }}
                             borderRadius={"5px"}
                             _placeholder={{color:'gray'}} 
-                            color={setTextColor(colorMode)} 
+                            color={setTextColor()} 
                             resize={"none"}
                             placeholder={"About me"}
                             name={"bio"}

@@ -37,14 +37,15 @@ export const Register: React.FC = () => {
             return
         }
         
-        setErrorMsg("")
+        setErrorMsg("");
+
         register({
             email,
             password,
             redirectPath: ROUTES.createProfile,
-        })
+        });
     }
-    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+    const setTextColor = () => colorMode === "dark" ? "#fff" : "#000";
     return(
         <Wrapper>
             <Box border={"1px solid gray"} padding={"10px"} borderRadius={"6px"}>
@@ -62,7 +63,7 @@ export const Register: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)}
+                                color={setTextColor()}
                                 placeholder={"Enter Email"}
                                 name={"email"}
                                 value={email}
@@ -76,7 +77,7 @@ export const Register: React.FC = () => {
                                 height={"44px"}
                                 borderRadius={"5px"}
                                 _placeholder={{color:'gray'}} 
-                                color={setTextColor(colorMode)}
+                                color={setTextColor()}
                                 placeholder={"Enter password"}
                                 type={"password"}
                                 name={"password"}

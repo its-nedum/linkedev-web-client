@@ -43,8 +43,8 @@ export const Navbar = () => {
 
   const isLoggedIn = getItem("auth") ? true : false;
   const linkedUser = JSON.parse(getItem("linkedev")!);
-  
-  useEffect(() => {
+
+  const getMenus = () => {
     if(isLoggedIn){
       // if user is loggedin hide Register and Login menu
       if(linkedUser?.status === 1){
@@ -74,22 +74,27 @@ export const Navbar = () => {
           )
       });
     }
-  },[isLoggedIn, linkedUser, menuItems])
+  }
+  
+  useEffect(() => {
+    getMenus()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
-  const setColor = (colorMode: string) => {
+  const setColor = () => {
     return colorMode === "dark" ? "#fff" : "#000";
   }
-  const setBackgroundColor = (colorMode: string) => {
+  const setBackgroundColor = () => {
     return colorMode === "dark" ? "refine.header.bg.dark" : "refine.header.bg.light";
   }
 
   return (
-    <Flex alignItems="center" backgroundColor={setBackgroundColor(colorMode)} color="white" px={4} py={2}>
+    <Flex alignItems="center" backgroundColor={setBackgroundColor()} color="white" px={4} py={2}>
       <Box p="2">
         <Heading 
           size="md" 
           cursor={"pointer"}
-          color={setColor(colorMode)} 
+          color={setColor()} 
           onClick={() => push(ROUTES.home)}
           >Linked Dev</Heading>
       </Box>
@@ -98,7 +103,7 @@ export const Navbar = () => {
         {menuItems.map((item) => (
           <Button 
             variant="ghost" 
-            color={setColor(colorMode)} 
+            color={setColor()} 
             key={item.label} 
             mr={4}
             onClick={() => 

@@ -41,7 +41,7 @@ export const ListUser: React.FC = () => {
         return <Error />;
     }
 
-    const setTextColor = (colorMode: string) => colorMode === "dark" ? "#fff" : "#000";
+    const setTextColor = () => colorMode === "dark" ? "#fff" : "#000";
 
     return (
         <Wrapper>
@@ -65,7 +65,7 @@ export const ListUser: React.FC = () => {
                                     fontWeight={"400"}
                                     fontSize={["16px", "20px"]}
                                     lineHeight={"21px"}
-                                    color={setTextColor(colorMode)}
+                                    color={setTextColor()}
                                     mb={"5px"}
                                     >Name: {user.firstName} {user.lastName}</Text>
                                     <Text
@@ -73,7 +73,7 @@ export const ListUser: React.FC = () => {
                                     fontWeight={"400"}
                                     fontSize={["16px", "20px"]}
                                     lineHeight={"21px"}
-                                    color={setTextColor(colorMode)}
+                                    color={setTextColor()}
                                     mb={"5px"}
                                     >Email: {user.email} </Text>
                                     <Text
@@ -81,7 +81,7 @@ export const ListUser: React.FC = () => {
                                     fontWeight={"400"}
                                     fontSize={["16px", "20px"]}
                                     lineHeight={"21px"}
-                                    color={setTextColor(colorMode)}
+                                    color={setTextColor()}
                                     mb={"5px"}
                                     >Skills: {user.skills.toString()} </Text>
                                     <Text
@@ -89,7 +89,7 @@ export const ListUser: React.FC = () => {
                                     fontWeight={"400"}
                                     fontSize={["16px", "20px"]}
                                     lineHeight={"21px"}
-                                    color={setTextColor(colorMode)}
+                                    color={setTextColor()}
                                     mb={"5px"}
                                     >Years of Experience: {user.yearsOfExperience} </Text>
                                 </Box>
