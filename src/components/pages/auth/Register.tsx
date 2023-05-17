@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 import { ROUTES } from "routes";
 import { useRegister } from "@refinedev/core";
 import { IAuth } from "interfaces";
+import { emailRegex } from "components/utils";
 
 export const Register: React.FC = () => {
     const { colorMode } = useColorMode();
@@ -34,11 +35,18 @@ export const Register: React.FC = () => {
 
         if(password.length < 8){
             setErrorMsg("*Password must be a min. of 8 characters");
-            return
+            return;
+        }
+
+        if(!emailRegex.test(email)){
+            setErrorMsg("*Invalid email address");
+            return;
         }
         
+        // clear error message if any
         setErrorMsg("");
 
+        // send form data to useRegister hook
         register({
             email,
             password,
