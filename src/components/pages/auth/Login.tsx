@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 import { ROUTES } from "routes";
 import { useLogin } from "@refinedev/core";
 import { IAuth } from "interfaces";
+import { emailRegex } from "components/utils";
 
 export const Login: React.FC = () => {
     const { colorMode } = useColorMode();
@@ -27,18 +28,29 @@ export const Login: React.FC = () => {
 
     const handleSubmit = (e: MouseEvent) => {
         e.preventDefault();
+
+        // check for empty input fields
         if(!email || !password){
             setErrorMsg("*All fields are required");
             return;
         }
 
+        // check password length
         if(password.length < 8){
             setErrorMsg("*Password must be a min. of 8 characters");
             return;
         }
 
+        // check email validity
+        if(!emailRegex.test(email)){
+            setErrorMsg("*Invalid email");
+            return;
+        }
+
+        // clear error message if any
         setErrorMsg("");
 
+        // send form data to usLogin hook
         login({
             email,
             password,
