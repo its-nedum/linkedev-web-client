@@ -14,7 +14,6 @@ import { NavLink } from "react-router-dom";
 import { ROUTES } from "routes";
 import { useLogin } from "@refinedev/core";
 import { IAuth } from "interfaces";
-import { emailRegex } from "components/utils";
 
 export const Login: React.FC = () => {
     const { colorMode } = useColorMode();
@@ -38,15 +37,8 @@ export const Login: React.FC = () => {
             return;
         }
 
-        if(!emailRegex.test(email)){
-            setErrorMsg("*Invalid email address");
-            return;
-        }
-
-        // clear error message if any
         setErrorMsg("");
 
-        // send form data to useLogin hook
         login({
             email,
             password,
