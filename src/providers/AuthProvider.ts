@@ -91,6 +91,7 @@ export const AuthProvider: AuthBindings = {
     logout: async (params: any): Promise<AuthActionResponse>=> {
         const { redirectPath } = params;
         removeItem("auth");
+        removeItem("linkedev");
         return {
             success: true,
             redirectTo: redirectPath
